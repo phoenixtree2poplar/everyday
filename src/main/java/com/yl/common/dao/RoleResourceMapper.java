@@ -2,9 +2,8 @@ package com.yl.common.dao;
 
 import com.yl.common.pojo.RoleResource;
 import com.yl.common.pojo.RoleResourceExample;
-import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 public interface RoleResourceMapper {
     int countByExample(RoleResourceExample example);

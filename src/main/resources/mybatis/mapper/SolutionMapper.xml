@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.yl.common.dao.ResourceMapper" >
-  <resultMap id="BaseResultMap" type="com.yl.common.pojo.Resource" >
+<mapper namespace="com.yl.common.dao.SolutionMapper" >
+  <resultMap id="BaseResultMap" type="com.yl.common.pojo.Solution" >
     <id column="id" property="id" jdbcType="VARCHAR" />
-    <result column="url" property="url" jdbcType="VARCHAR" />
+    <result column="http" property="http" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="code" property="code" jdbcType="VARCHAR" />
+    <result column="describe" property="describe" jdbcType="VARCHAR" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
   </resultMap>
@@ -66,15 +69,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, url, create_time, update_time
+    id, http, user_id, code, describe, create_time, update_time
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.yl.common.pojo.ResourceExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.yl.common.pojo.SolutionExample" >
     select
     <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from resource
+    from solution
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -85,33 +88,44 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
-    from resource
+    from solution
     where id = #{id,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
-    delete from resource
+    delete from solution
     where id = #{id,jdbcType=VARCHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="com.yl.common.pojo.ResourceExample" >
-    delete from resource
+  <delete id="deleteByExample" parameterType="com.yl.common.pojo.SolutionExample" >
+    delete from solution
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.yl.common.pojo.Resource" >
-    insert into resource (id, url, create_time, 
+  <insert id="insert" parameterType="com.yl.common.pojo.Solution" >
+    insert into solution (id, http, user_id, 
+      code, describe, create_time, 
       update_time)
-    values (#{id,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+    values (#{id,jdbcType=VARCHAR}, #{http,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, 
+      #{code,jdbcType=VARCHAR}, #{describe,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
       #{updateTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.yl.common.pojo.Resource" >
-    insert into resource
+  <insert id="insertSelective" parameterType="com.yl.common.pojo.Solution" >
+    insert into solution
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
       </if>
-      <if test="url != null" >
-        url,
+      <if test="http != null" >
+        http,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="code != null" >
+        code,
+      </if>
+      <if test="describe != null" >
+        describe,
       </if>
       <if test="createTime != null" >
         create_time,
@@ -124,8 +138,17 @@
       <if test="id != null" >
         #{id,jdbcType=VARCHAR},
       </if>
-      <if test="url != null" >
-        #{url,jdbcType=VARCHAR},
+      <if test="http != null" >
+        #{http,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null" >
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="describe != null" >
+        #{describe,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null" >
         #{createTime,jdbcType=TIMESTAMP},
@@ -135,20 +158,29 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.yl.common.pojo.ResourceExample" resultType="java.lang.Integer" >
-    select count(*) from resource
+  <select id="countByExample" parameterType="com.yl.common.pojo.SolutionExample" resultType="java.lang.Integer" >
+    select count(*) from solution
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update resource
+    update solution
     <set >
       <if test="record.id != null" >
         id = #{record.id,jdbcType=VARCHAR},
       </if>
-      <if test="record.url != null" >
-        url = #{record.url,jdbcType=VARCHAR},
+      <if test="record.http != null" >
+        http = #{record.http,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.code != null" >
+        code = #{record.code,jdbcType=VARCHAR},
+      </if>
+      <if test="record.describe != null" >
+        describe = #{record.describe,jdbcType=VARCHAR},
       </if>
       <if test="record.createTime != null" >
         create_time = #{record.createTime,jdbcType=TIMESTAMP},
@@ -162,20 +194,32 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update resource
+    update solution
     set id = #{record.id,jdbcType=VARCHAR},
-      url = #{record.url,jdbcType=VARCHAR},
+      http = #{record.http,jdbcType=VARCHAR},
+      user_id = #{record.userId,jdbcType=VARCHAR},
+      code = #{record.code,jdbcType=VARCHAR},
+      describe = #{record.describe,jdbcType=VARCHAR},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       update_time = #{record.updateTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.yl.common.pojo.Resource" >
-    update resource
+  <update id="updateByPrimaryKeySelective" parameterType="com.yl.common.pojo.Solution" >
+    update solution
     <set >
-      <if test="url != null" >
-        url = #{url,jdbcType=VARCHAR},
+      <if test="http != null" >
+        http = #{http,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null" >
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="describe != null" >
+        describe = #{describe,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null" >
         create_time = #{createTime,jdbcType=TIMESTAMP},
@@ -186,9 +230,12 @@
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.yl.common.pojo.Resource" >
-    update resource
-    set url = #{url,jdbcType=VARCHAR},
+  <update id="updateByPrimaryKey" parameterType="com.yl.common.pojo.Solution" >
+    update solution
+    set http = #{http,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=VARCHAR},
+      code = #{code,jdbcType=VARCHAR},
+      describe = #{describe,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=VARCHAR}

@@ -18,7 +18,7 @@ public class UserController {
 
     @GetMapping("get")
     public String get() {
-        User user = userMapper.selectByPrimaryKey(1L);
+        User user = userMapper.selectByPrimaryKey("1");
         return user.toString();
     }
 }

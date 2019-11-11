@@ -2,9 +2,8 @@ package com.yl.common.dao;
 
 import com.yl.common.pojo.UserRole;
 import com.yl.common.pojo.UserRoleExample;
-import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 public interface UserRoleMapper {
     int countByExample(UserRoleExample example);

@@ -7,8 +7,6 @@
         <groupId>com.yl</groupId>
         <artifactId>everyday</artifactId>
         <version>1.0-SNAPSHOT</version>
-        <!--relativePath执行parent的pom文件-->
-        <relativePath>../pom.xml</relativePath>
     </parent>
 
     <artifactId>user</artifactId>
@@ -16,7 +14,6 @@
     <name>user</name>
     <description>用户管理</description>
 
-    <!--表示pom 项目里没有java代码，也不执行任何代码，只是为了聚合工程或传递依赖用的-->
     <packaging>jar</packaging>
 
     <properties>
@@ -33,40 +30,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
-            <scope>runtime</scope>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.junit.vintage</groupId>
-                    <artifactId>junit-vintage-engine</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-
-        <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus</artifactId>
-            <version>3.0.5</version>
         </dependency>
 
         <dependency>

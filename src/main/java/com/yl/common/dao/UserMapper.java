@@ -2,9 +2,8 @@ package com.yl.common.dao;
 
 import com.yl.common.pojo.User;
 import com.yl.common.pojo.UserExample;
-import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 public interface UserMapper {
     int countByExample(UserExample example);
