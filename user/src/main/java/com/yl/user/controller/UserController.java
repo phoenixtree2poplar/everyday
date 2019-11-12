@@ -1,6 +1,7 @@
 package com.yl.user.controller;
 
 import com.yl.common.dao.UserMapper;
+import com.yl.common.entity.Result;
 import com.yl.common.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,8 +18,8 @@ public class UserController {
     private UserMapper userMapper;
 
     @GetMapping("get")
-    public String get() {
-        User user = userMapper.selectByPrimaryKey("1");
-        return user.toString();
+    public Result get() {
+
+        return Result.ok(1);
     }
 }
