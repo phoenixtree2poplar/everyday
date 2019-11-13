@@ -3,6 +3,7 @@ package com.yl.common.dao;
 import com.yl.common.pojo.User;
 import com.yl.common.pojo.UserExample;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
@@ -28,4 +29,7 @@ public interface UserMapper {
     int updateByPrimaryKeySelective(User record);
 
     int updateByPrimaryKey(User record);
+
+    @Select("select * from user where username=#{username}")
+    public User findUserByUsername(String username);
 }

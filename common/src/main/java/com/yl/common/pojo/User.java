@@ -3,6 +3,15 @@ package com.yl.common.pojo;
 import java.util.Date;
 
 public class User {
+
+    public User() {}
+
+    public User(User user) {
+        this.id = user.getId();
+        this.username = user.getUsername();
+        this.password = user.getPassword();
+    }
+
     private String id;
 
     private String username;

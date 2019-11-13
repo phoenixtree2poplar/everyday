@@ -22,4 +22,16 @@ public class UserController {
 
         return Result.ok(1);
     }
+
+    @GetMapping("admin")
+    public Result admin() {
+
+        return Result.build(200, "success", "admin");
+    }
+
+    @GetMapping("hello")
+    public Result hello() {
+
+        return Result.build(200, "success", "hello");
+    }
 }
