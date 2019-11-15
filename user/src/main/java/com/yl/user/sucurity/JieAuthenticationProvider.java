@@ -9,6 +9,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 /**
@@ -21,6 +22,8 @@ public class JieAuthenticationProvider implements AuthenticationProvider {
 
     @Autowired
     private JieUserDetailService myUserDetailService;
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
@@ -32,7 +35,7 @@ public class JieAuthenticationProvider implements AuthenticationProvider {
         }
 
         //加密过程在这里体现
-        if (!password.equals(user.getPassword())) {
+        if (!bCryptPasswordEncoder.matches(password, user.getPassword())) {
             throw new BadCredentialsException("密码不正确");
         }
 

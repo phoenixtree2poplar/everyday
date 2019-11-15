@@ -2,7 +2,6 @@ package com.yl.user.controller;
 
 import com.yl.common.dao.UserMapper;
 import com.yl.common.entity.Result;
-import com.yl.common.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
