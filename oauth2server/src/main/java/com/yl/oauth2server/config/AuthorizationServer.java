@@ -79,7 +79,9 @@ public class AuthorizationServer extends AuthorizationServerConfigurerAdapter {
                 .autoApprove(false)
                 //回调地址
                 //http://localhost:8200/oauth/authorize?client_id=cli-1&response_type=code&scope=all&redirect_uri=https://www.baidu.com
+                //返回code码
                 //code=a5jUcf
+                //token校验地址：http://localhost:8200/oauth/check_token?token=d977036e-2573-41a3-a1ff-be5f1e0fb8d4
                 .redirectUris("https://www.baidu.com");
         super.configure(clients);
     }
