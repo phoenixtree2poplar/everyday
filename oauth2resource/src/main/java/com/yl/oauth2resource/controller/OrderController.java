@@ -15,7 +15,7 @@ public class OrderController {
 
 
     @GetMapping(value = "/user/get")
-    //标记拥有p1权限可以访问资源
+    //标记拥有ROLE_ADMIN权限可以访问资源
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
     public String get() {
         return "访问资源1";

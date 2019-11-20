@@ -1,9 +1,8 @@
-package com.yl.oauth2server.config;
+package com.yl.oauth2resource.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.oauth2.provider.token.TokenStore;
-import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
@@ -11,6 +10,7 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
  * @author yangjie
  * 2019/11/16 14:16
  */
+//配置jwt时候需要从授权服务器复制一份过来
 @Configuration
 public class TokenConfig {
 
