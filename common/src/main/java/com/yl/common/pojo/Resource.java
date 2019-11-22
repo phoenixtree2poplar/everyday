@@ -2,7 +2,7 @@ package com.yl.common.pojo;
 
 import java.util.Date;
 
-public class Resource {
+public class Resource extends BasePojo {
     private String id;
 
     private String url;

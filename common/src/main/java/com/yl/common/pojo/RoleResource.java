@@ -1,6 +1,6 @@
 package com.yl.common.pojo;
 
-public class RoleResource {
+public class RoleResource extends BasePojo {
     private String id;
 
     private String roleId;

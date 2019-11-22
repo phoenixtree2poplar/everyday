@@ -2,7 +2,7 @@ package com.yl.common.pojo;
 
 import java.util.Date;
 
-public class User {
+public class User extends BasePojo {
 
     public User() {}
 

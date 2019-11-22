@@ -2,7 +2,7 @@ package com.yl.common.pojo;
 
 import java.util.Date;
 
-public class Role {
+public class Role extends BasePojo {
     private String id;
 
     private String name;
