@@ -7,9 +7,9 @@
         <artifactId>everyday</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-    <artifactId>oauth2resource</artifactId>
+    <artifactId>gateway</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>oauth2resource</name>
+    <name>gateway</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
@@ -30,7 +30,26 @@
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.junit.vintage</groupId>
+                    <artifactId>junit-vintage-engine</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <!-- 将微服务provider侧注册进eureka   这里依赖不带server-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-eureka</artifactId>
+        </dependency>
+
+        <!-- zuul路由网关 -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-zuul</artifactId>
         </dependency>
 
         <!--security权限管理-->
@@ -49,12 +68,6 @@
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-jwt</artifactId>
-        </dependency>
-
-        <!-- 将微服务provider侧注册进eureka   这里依赖不带server-->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-eureka</artifactId>
         </dependency>
     </dependencies>
 

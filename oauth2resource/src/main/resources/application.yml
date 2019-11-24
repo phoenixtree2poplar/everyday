@@ -1,5 +1,5 @@
 server:
-  port: 8300
+  port: 9200
 
 mybatis:
   #  config-location: classpath:mybatis/mybatis.cfg.xml        # mybatis配置文件所在路径
@@ -10,7 +10,7 @@ spring:
   application:
     #特别重要！！对外暴露的微服务名字， 在eureka页面上显示的微服务的application的名字
     #注意在集成ribbon时候有多个提供相同的服务的user，多个功能相同的服务要保持name一致， 需要修改下面的instance-id
-    name: microservicecloud-user
+    name: resource-user
   datasource:
     url: jdbc:mysql://localhost:3306/everyday?useUnicode=true&characterEncoding=utf8
     driverClassName: com.mysql.jdbc.Driver
@@ -21,3 +21,17 @@ spring:
       initial-size: 5                                       # 初始化连接数
       max-total: 5                                          # 最大连接数
       max-wait-millis: 200                                  # 等待连接获取的最大超时时间
+
+eureka:
+  client: #客户端注册进eureka服务列表内
+    service-url:
+      defaultZone: http://localhost:8100/eureka/
+  instance:
+    instance-id: resource-user #在eureka页面上显示的微服务的status的名字
+    prefer-ip-address: true     #访问路径可以显示IP地址，再euruka页面显示服务的ip地址
+
+info: #当在eureka里面点击服务名字时，返回json而不是404
+  app.name: resource-user
+  company.name: www.yangjie.com
+  build.artifactId: ${project.artifactId}
+  build.version: ${project.version}

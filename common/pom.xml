@@ -59,6 +59,13 @@
             <version>3.4</version>
         </dependency>
 
+        <!--fastjson-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>${fastjson.version}</version>
+        </dependency>
+
 
     </dependencies>
 
