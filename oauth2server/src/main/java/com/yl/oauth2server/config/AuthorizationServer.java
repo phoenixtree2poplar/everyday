@@ -48,8 +48,6 @@ public class AuthorizationServer extends AuthorizationServerConfigurerAdapter {
     private AuthenticationManager authenticationManager;
     @Autowired
     private JwtAccessTokenConverter jwtAccessTokenConverter;
-    @Autowired
-    private PasswordEncoder passwordEncoder;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -93,9 +91,7 @@ public class AuthorizationServer extends AuthorizationServerConfigurerAdapter {
 
     @Bean
     public ClientDetailsService clientDetailsService(DataSource dataSource) {
-        ClientDetailsService clientDetailsService = new JdbcClientDetailsService(dataSource);
-        ((JdbcClientDetailsService) clientDetailsService).setPasswordEncoder(passwordEncoder);
-        return clientDetailsService;
+        return new JdbcClientDetailsService(dataSource);
     }
 
     /*客户端配置， 允许那些客户端来获取令牌, 可以放在内存，建议放在数据库中*/
@@ -146,6 +142,8 @@ public class AuthorizationServer extends AuthorizationServerConfigurerAdapter {
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
         security
+                //配置客户端密码加密
+                .passwordEncoder(passwordEncoder())
                 //使用jwt时候完全公开
                 .tokenKeyAccess("permitAll()")
                 //允许检测令牌
