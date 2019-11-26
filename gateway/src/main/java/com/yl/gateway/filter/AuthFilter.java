@@ -9,6 +9,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.security.oauth2.provider.OAuth2Request;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.*;
 
 /**
@@ -31,6 +32,11 @@ public class AuthFilter extends ZuulFilter {
 
     @Override
     public boolean shouldFilter() {
+        RequestContext ctx = RequestContext.getCurrentContext();
+        HttpServletRequest request = ctx.getRequest();
+        if (request.getRequestURL().toString().contains("oauth/token")) {
+            return false;
+        }
         return true;
     }
 

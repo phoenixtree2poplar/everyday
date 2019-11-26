@@ -14,67 +14,51 @@ import org.springframework.security.oauth2.provider.token.TokenStore;
  * 2019/11/17 9:25
  */
 @Configuration
-public class ResourceServerConfig {
+@EnableResourceServer
+public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
     //资源id
-    private static final String RESOURCE_ID = "gateWay";
+    public static final String RESOURCE_ID = "res-1";
+    //对称秘钥
+    private String SIGNING_KEY = "yangjie";
 
     @Autowired
     private TokenStore tokenStore;
 
-    /*网关配置资源集合*/
+    //配置令牌验证服务， 使用jtw代替
+//    @Bean
+//    public ResourceServerTokenServices tokenServices() {
+//        //使用远程服务请求授权器校验，必须指定校验token的url、client_id、client_secret
+//        RemoteTokenServices services = new RemoteTokenServices();
+//        services.setCheckTokenEndpointUrl("http://localhost:8200/oauth/check_token");
+//        services.setClientId("cli-1");
+//        services.setClientSecret("sec-1");
+//        return services;
+//    }
 
-    //配置认证服务器资源
-    @Configuration
-    @EnableResourceServer
-    public class OauthServerResourceServerConfig extends ResourceServerConfigurerAdapter {
-
-        @Override
-        public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
-            //资源id
-            resources.resourceId(RESOURCE_ID)
-                    .tokenStore(tokenStore)
-                    .stateless(true);
-            super.configure(resources);
-        }
-
-        @Override
-        public void configure(HttpSecurity http) throws Exception {
-            http
-                    .authorizeRequests()
-                    .antMatchers("/oauth/**").permitAll();
-            super.configure(http);
-        }
+    @Override
+    public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
+        //资源id
+        resources.resourceId(RESOURCE_ID)
+                //普通验证令牌服务
+//                .tokenServices(tokenServices())
+                //jwt令牌验证服务
+                .tokenStore(tokenStore)
+                .stateless(true);
+        super.configure(resources);
     }
 
-    //配置用户资源
-    @Configuration
-    @EnableResourceServer
-    public class UserResourceServerConfig extends ResourceServerConfigurerAdapter {
-
-        @Override
-        public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
-            //资源id
-            resources.resourceId(RESOURCE_ID)
-                    //jwt令牌验证服务
-                    .tokenStore(tokenStore)
-                    .stateless(true);
-            super.configure(resources);
-        }
-
-        @Override
-        public void configure(HttpSecurity http) throws Exception {
-            http
-                    .authorizeRequests()
-                    //scope范围
-                    .antMatchers("/user/**").access("#oauth2.hasScope('ROLE_USER')")
-                    .and()
-                    //关闭csrf
-                    .csrf().disable()
-                    //session不用记录， 我们是关于token的
-                    .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-            super.configure(http);
-        }
+    @Override
+    public void configure(HttpSecurity http) throws Exception {
+        http
+                .authorizeRequests()
+                //scope范围
+                .antMatchers("/**").permitAll()
+                .and()
+                //关闭csrf
+                .csrf().disable()
+                //session不用记录， 我们是关于token的
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+        super.configure(http);
     }
-
 }
