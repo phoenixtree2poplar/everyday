@@ -7,9 +7,9 @@
         <artifactId>everyday</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-    <artifactId>oauth2resource</artifactId>
+    <artifactId>userservice</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>oauth2resource</name>
+    <name>userservice</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>

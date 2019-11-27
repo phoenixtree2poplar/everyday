@@ -1,4 +1,4 @@
-package com.yl.oauth2resource.config;
+package com.yl.userservice.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;

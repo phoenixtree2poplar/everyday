@@ -10,6 +10,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
  *
  * @author Administrator
  * 网关的安全访问控制
+ *
+ * 使用网关验证的时候需要
  */
 @Configuration
 @EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)

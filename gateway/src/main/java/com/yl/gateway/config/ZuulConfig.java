@@ -12,6 +12,7 @@ import org.springframework.web.filter.CorsFilter;
 /**
  * @author yangjie
  * 2019/11/24 13:19
+ * 使用网关验证的时候需要
  */
 @Configuration
 public class ZuulConfig {

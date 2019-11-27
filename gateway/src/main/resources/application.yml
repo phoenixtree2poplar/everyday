@@ -21,10 +21,10 @@ eureka:
 zuul:
   routes:
     oauth2_server:
-      path: /oauth/** #代理后的名字#请求格式是/oauth/**都转发到oauth2_server服务
+      path: /login/** #代理后的名字#请求格式是/oauth/**都转发到oauth2_server服务
       serviceId: oauth2_server #服务的真实名字
     oauth2_resource:
-      path: /user/**
+      path: /user-service/**
       serviceId: resource-user
     #注意上面配置好之后， 真实名字和代理后的名字都可以访问
   #若想真实失效，则添加下面配置

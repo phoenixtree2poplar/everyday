@@ -9,9 +9,9 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>user</artifactId>
+    <artifactId>securitytest</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>user</name>
+    <name>securitytest</name>
     <description>用户管理</description>
 
     <packaging>jar</packaging>

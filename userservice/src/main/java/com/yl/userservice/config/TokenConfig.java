@@ -1,4 +1,4 @@
-package com.yl.oauth2resource.config;
+package com.yl.userservice.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
