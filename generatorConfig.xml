@@ -49,12 +49,20 @@
         </javaClientGenerator>
 
         <!-- 指定数据表 -->
-        <table schema="" tableName="user"></table>
-        <table schema="" tableName="resource"></table>
-        <table schema="" tableName="role"></table>
-        <table schema="" tableName="role_resource"></table>
-        <table schema="" tableName="solution"></table>
-        <table schema="" tableName="user_role"></table>
+        <!--<table schema="" tableName="user"></table>-->
+        <!--<table schema="" tableName="resource"></table>-->
+        <!--<table schema="" tableName="role"></table>-->
+        <!--<table schema="" tableName="role_resource"></table>-->
+        <!--<table schema="" tableName="solution"></table>-->
+        <!--<table schema="" tableName="user_role"></table>-->
+        <table schema="" tableName="clientdetails"></table>
+        <table schema="" tableName="oauth_access_token"></table>
+        <table schema="" tableName="oauth_approvals"></table>
+        <table schema="" tableName="oauth_client_details"></table>
+        <table schema="" tableName="oauth_client_token"></table>
+        <table schema="" tableName="oauth_code"></table>
+        <table schema="" tableName="oauth_refresh_token"></table>
+
 
         <!-- 有些表的字段需要指定java类型
         <table schema="DB2ADMIN" tableName="ALLTYPES" domainObjectName="Customer" >
