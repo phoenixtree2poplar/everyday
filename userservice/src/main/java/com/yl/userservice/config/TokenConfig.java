@@ -2,9 +2,17 @@ package com.yl.userservice.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
+import org.springframework.security.jwt.crypto.sign.RsaVerifier;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.stream.Collectors;
 
 /**
  * @author yangjie
@@ -15,7 +23,7 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 public class TokenConfig {
 
     //对称秘钥
-    private String SIGNING_KEY = "yangjie";
+    //private String SIGNING_KEY = "yangjie";
 
     //令牌存储策略，基于jwt
     @Bean
@@ -26,8 +34,17 @@ public class TokenConfig {
     @Bean
     public JwtAccessTokenConverter jwtAccessTokenConverter() {
         JwtAccessTokenConverter jwtAccessTokenConverter = new JwtAccessTokenConverter();
-        //堆成秘钥，资源服务器使用该秘钥来验证
-        jwtAccessTokenConverter.setSigningKey(SIGNING_KEY);
+        //对称秘钥，资源服务器使用该秘钥来验证
+        //jwtAccessTokenConverter.setSigningKey(SIGNING_KEY);
+        //非对称加密
+        Resource resource = new ClassPathResource("pub.txt");
+        String publicKey = null;
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(resource.getInputStream()))) {
+            publicKey = br.lines().collect(Collectors.joining("\n"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        jwtAccessTokenConverter.setSigningKey(publicKey);
         return jwtAccessTokenConverter;
     }
 
