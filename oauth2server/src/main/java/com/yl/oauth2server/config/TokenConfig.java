@@ -33,8 +33,8 @@ public class TokenConfig {
         //堆成秘钥，资源服务器使用该秘钥来验证
         //对称加密
         //jwtAccessTokenConverter.setSigningKey(SIGNING_KEY);
-        //非对称加密, "oauth2".toCharArray() 这里配置的是口令，getKeyPair("oauth2") 这里配置的是别名
-        KeyPair keyPair = new KeyStoreKeyFactory(new ClassPathResource("oauth2.jks"), "oauth2".toCharArray()).getKeyPair("oauth2");
+        //非对称加密, "mypass".toCharArray() 这里配置的是口令，getKeyPair("mytest") 这里配置的是别名
+        KeyPair keyPair = new KeyStoreKeyFactory(new ClassPathResource("mytest.jks"), "mypass".toCharArray()).getKeyPair("mytest");
         jwtAccessTokenConverter.setKeyPair(keyPair);
         return jwtAccessTokenConverter;
     }

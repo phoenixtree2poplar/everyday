@@ -44,7 +44,8 @@ public class TokenConfig {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        jwtAccessTokenConverter.setSigningKey(publicKey);
+        jwtAccessTokenConverter.setVerifierKey(publicKey);
+        jwtAccessTokenConverter.setVerifier(new RsaVerifier(publicKey));
         return jwtAccessTokenConverter;
     }
 
