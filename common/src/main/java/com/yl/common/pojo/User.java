@@ -1,5 +1,6 @@
 package com.yl.common.pojo;
 
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 public class User extends BasePojo {
@@ -14,10 +15,12 @@ public class User extends BasePojo {
 
     private String id;
 
+    @NotNull
     private String username;
 
     private String password;
 
+    @NotNull
     private Date createTime;
 
     private Date updateTime;

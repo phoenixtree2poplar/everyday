@@ -31,5 +31,8 @@ public interface UserMapper {
     int updateByPrimaryKey(User record);
 
     @Select("select * from user where username=#{username}")
-    public User findUserByUsername(String username);
+    User findUserByUsername(String username);
+
+    int addUser(User user);
+
 }

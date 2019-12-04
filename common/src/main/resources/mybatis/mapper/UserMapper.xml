@@ -240,4 +240,21 @@
       email = #{email,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+
+  <insert id="addUser" parameterType="com.yl.common.pojo.User" useGeneratedKeys="true" keyProperty="id">
+    <!--
+    设置自增主键
+    insert内嵌一层selectKey标签，其中keyProperty值为model的主键，
+    model的主键对应的就是数据库表的主键；resultType为返回的数据类型，
+    因为是32为的uuid，所以返回的是string的类型；
+    order表示生成主键的查询语句是在数据保存到数据库之前执行还是保存数据之后执行，
+    这里我们是要将32位的uuid的设为保存数据的主键，所以自然是保存数据之前执行查询uuid的语句，所以为BEFORE；
+    -->
+    <selectKey keyProperty="id" resultType="java.lang.String" order="BEFORE">
+      select replace(uuid(),'-','') from dual
+    </selectKey>
+    insert into user(username, password, create_time, update_time, status, email)
+    VALUES (#{username}, #{password}, #{createTime}, #{updateTime}, #{status}, #{email})
+  </insert>
+
 </mapper>
