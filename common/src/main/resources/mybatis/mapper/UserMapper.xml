@@ -254,7 +254,7 @@
       select replace(uuid(),'-','') from dual
     </selectKey>
     insert into user(username, password, create_time, update_time, status, email)
-    VALUES (#{username}, #{password}, #{createTime}, #{updateTime}, #{status}, #{email})
+    VALUES (#{id}, #{username}, #{password}, #{createTime}, #{updateTime}, #{status}, #{email})
   </insert>
 
 </mapper>

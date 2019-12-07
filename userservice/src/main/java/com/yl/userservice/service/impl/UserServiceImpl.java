@@ -4,6 +4,7 @@ import com.yl.common.dao.UserMapper;
 import com.yl.common.pojo.User;
 import com.yl.userservice.service.UserServiceIn;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 /**
@@ -23,6 +24,7 @@ public class UserServiceImpl implements UserServiceIn {
 
     @Override
     public int addUser(User user) {
+        user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
         return userMapper.addUser(user);
     }
 }
