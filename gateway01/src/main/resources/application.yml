@@ -1,6 +1,6 @@
 #此时网管被认为是一个资源服务
 server:
-  port: 7100
+  port: 7101
 
 spring:
   application:

@@ -1,6 +1,6 @@
-package com.yl.gateway.config;
+package com.yl.gateway02.config;
 
-import com.yl.gateway.filter.AuthFilter;
+import com.yl.gateway02.filter.AuthFilter;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

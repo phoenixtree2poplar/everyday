@@ -1,4 +1,4 @@
-package com.yl.gateway.filter;
+package com.yl.gateway01.filter;
 
 import com.alibaba.fastjson.JSONObject;
 import com.netflix.zuul.ZuulFilter;
@@ -33,6 +33,7 @@ public class AuthFilter extends ZuulFilter {
 
     @Override
     public boolean shouldFilter() {
+        System.out.println("=======网关01被调用====");
         RequestContext ctx = RequestContext.getCurrentContext();
         HttpServletRequest request = ctx.getRequest();
         return !request.getRequestURL().toString().contains("oauth");

@@ -1,4 +1,4 @@
-package com.yl.gateway;
+package com.yl.gateway01;
 
 import org.apache.catalina.Context;
 import org.apache.catalina.connector.Connector;
@@ -16,10 +16,10 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
 @EnableZuulProxy
 @EnableEurekaClient
-public class GatewayApplication {
+public class Gateway01Application {
 
     public static void main(String[] args) {
-        SpringApplication.run(GatewayApplication.class, args);
+        SpringApplication.run(Gateway01Application.class, args);
     }
 
     /**

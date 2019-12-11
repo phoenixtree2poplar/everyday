@@ -63,6 +63,7 @@
         <module>oauth2server</module>
         <module>securitytest</module>
         <module>eureka</module>
-        <module>gateway</module>
+        <module>gateway01</module>
+        <module>gateway02</module>
     </modules>
 </project>

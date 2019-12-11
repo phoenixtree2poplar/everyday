@@ -1,4 +1,4 @@
-package com.yl.gateway.config;
+package com.yl.gateway02.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
