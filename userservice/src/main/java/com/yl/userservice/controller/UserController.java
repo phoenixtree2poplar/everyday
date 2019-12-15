@@ -2,6 +2,7 @@ package com.yl.userservice.controller;
 
 import com.yl.common.entity.Result;
 import com.yl.common.pojo.User;
+import com.yl.userservice.entity.CliUser;
 import com.yl.userservice.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -16,7 +17,7 @@ import java.util.List;
 /**
  * @author yangjie
  * 2019/11/17 9:21
- *
+ * <p>
  * 资源服务器
  */
 @RestController
@@ -62,7 +63,6 @@ public class UserController {
             e.printStackTrace();
             return Result.error("fail", e);
         }
-
     }
 
 }

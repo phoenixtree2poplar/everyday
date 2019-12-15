@@ -51,7 +51,8 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
         http
                 .authorizeRequests()
                 //scope范围
-                .antMatchers("/**").access("#oauth2.hasScope('ROLE_ADMIN')")
+                .antMatchers("/user/**").access("#oauth2.hasScope('ROLE_ADMIN')")
+                .antMatchers("/regist/**").anonymous()
                 .and()
                 //关闭csrf
                 .csrf().disable()
