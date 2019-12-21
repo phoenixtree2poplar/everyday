@@ -22,7 +22,6 @@ public class MyThreadService {
     public void runnable() throws InterruptedException {
         ExecutorService executorService = Executors.newCachedThreadPool();
         for (int i = 0; i < 5; i++) {
-            Thread.sleep(1000);
             executorService.submit(new MyThreadRunable());
         }
         executorService.shutdown();
@@ -32,7 +31,6 @@ public class MyThreadService {
     public void callable() throws InterruptedException {
         ExecutorService executorService = Executors.newCachedThreadPool();
         for (int i = 0; i < 5; i++) {
-            Thread.sleep(1000);
             executorService.submit(new MyThreadCallable());
         }
         executorService.shutdown();
@@ -43,7 +41,6 @@ public class MyThreadService {
         ArrayList<Future<String>> result = new ArrayList<>();
         ExecutorService executorService = Executors.newCachedThreadPool();
         for (int i = 0; i < 5; i++) {
-            Thread.sleep(1000);
             result.add(executorService.submit(new MyThreadCallable()));
         }
 
