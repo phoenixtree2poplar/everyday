@@ -2,6 +2,8 @@ package com.yl.userservice.controller;
 
 import com.yl.common.entity.Result;
 import com.yl.userservice.entity.CliUser;
+import com.yl.userservice.service.impl.UserServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,6 +23,9 @@ import java.util.List;
 @RequestMapping("regist")
 public class UserRegistController {
 
+    @Autowired
+    private UserServiceImpl userService;
+
     @PostMapping
     public Result addUser(@RequestBody @Valid CliUser user, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
@@ -32,6 +37,15 @@ public class UserRegistController {
             return Result.error("fail", mesList);
         }
 
-        return Result.error("fail", "");
+        try {
+            userService.addCliUser(user);
+            return Result.ok("succuss");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Result.error("fail", "");
+        }
+
+
     }
+
 }

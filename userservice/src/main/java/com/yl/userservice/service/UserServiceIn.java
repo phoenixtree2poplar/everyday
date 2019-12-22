@@ -1,6 +1,7 @@
 package com.yl.userservice.service;
 
 import com.yl.common.pojo.User;
+import com.yl.userservice.entity.CliUser;
 
 /**
  * @author yangjie
@@ -18,4 +19,8 @@ public interface UserServiceIn {
      */
     int addUser(User user);
 
+    /**
+     * 添加客户端用户
+     */
+    int addCliUser(CliUser user);
 }

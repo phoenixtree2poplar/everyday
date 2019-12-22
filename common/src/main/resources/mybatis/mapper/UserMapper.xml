@@ -253,7 +253,7 @@
     <selectKey keyProperty="id" resultType="java.lang.String" order="BEFORE">
       select replace(uuid(),'-','') from dual
     </selectKey>
-    insert into user(username, password, create_time, update_time, status, email)
+    insert into user(id, username, password, create_time, update_time, status, email)
     VALUES (#{id}, #{username}, #{password}, #{createTime}, #{updateTime}, #{status}, #{email})
   </insert>
 
