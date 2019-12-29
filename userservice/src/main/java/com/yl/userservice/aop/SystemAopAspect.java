@@ -1,6 +1,7 @@
 package com.yl.userservice.aop;
 
 import com.alibaba.fastjson.JSONObject;
+import com.yl.common.dao.SysLogMapper;
 import com.yl.common.pojo.User;
 import com.yl.userservice.annotation.SysLog;
 import org.apache.ibatis.javassist.*;
@@ -16,6 +17,7 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -24,6 +26,7 @@ import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.Date;
 
 /**
  * @author yangjie
@@ -33,10 +36,13 @@ import java.lang.reflect.Method;
 @Component
 public class SystemAopAspect {
 
+    private static final Logger log = LoggerFactory.getLogger(SystemAopAspect.class);
+
     @Value("${sys.log}")
     private String isOpen;
 
-    private static final Logger log = LoggerFactory.getLogger(SystemAopAspect.class);
+    @Autowired
+    private SysLogMapper sysLogMapper;
 
     private static String[] types = { "java.lang.Integer", "java.lang.Double", "java.lang.Float", "java.lang.Long",
             "java.lang.Short", "java.lang.Byte", "java.lang.Boolean", "java.lang.Char", "java.lang.String", "int",
@@ -95,32 +101,17 @@ public class SystemAopAspect {
                     logContent = writeLogInfo(paramNames, joinPoint);
                 }
 
-//				SysLog sysLog = new SysLog();
-//				sysLog.setLogId(Commons.getUUID());
-//				sysLog.setLogClassName(clazzSimpleName);
-//				sysLog.setLogMethodName(methodName);
-//				sysLog.setLogModular(modular);
-//				// 操作类型 1 增 2 删 3 改 4查 5 登录 6 退出
-//				sysLog.setLogType(type);
-//				sysLog.setLogMethodParam(logContent);
-//				sysLog.setCreateName(SessionUtils.getUserName());
-//				sysLog.setCreateTime(Commons.getTime());
-//
-//				// 插入数据库
-//				int resultStatus = sysLogService.saveSysLog(sysLog);
-//				if (resultStatus == 1) {
-//					log.info("注解日志记录成功....");
-//				}
-
+                String userName = "anonymous";
                 Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
                 if (authentication instanceof OAuth2Authentication) {
                     OAuth2Authentication oAuth2Authentication = (OAuth2Authentication) authentication;
                     Authentication userAuthentication = oAuth2Authentication.getUserAuthentication();
                     String principal = (String) userAuthentication.getPrincipal();
                     User user = JSONObject.parseObject(principal, User.class);
-                    log.info("======userName:" + user.getUsername());
+                    userName = user.getUsername();
+                    log.info("======userName:" + userName);
                 } else {
-                    log.info("======userName: anonymous");
+                    log.info("======userName: " + userName);
                 }
 
                 // 可以创建日志entity，插入数据库
@@ -130,6 +121,26 @@ public class SystemAopAspect {
                 log.info("======modular:" + modular);
                 log.info("======type:" + type);
                 log.info("======logContent:" + logContent);
+
+                com.yl.common.pojo.SysLog sysLog = new com.yl.common.pojo.SysLog();
+                sysLog.setOperateUser(userName);
+                sysLog.setClazzName(clazzName);
+				sysLog.setClazzsimpleName(clazzSimpleName);
+				sysLog.setMethodName(methodName);
+				sysLog.setModular(modular);
+				// 操作类型 1 增 2 删 3 改 4查 5 登录 6 退出
+				sysLog.setType(type + "");
+				sysLog.setLogContent(logContent);
+				sysLog.setCreateTime(new Date());
+
+				// 插入数据库
+				int resultStatus = sysLogMapper.insert(sysLog);
+				if (resultStatus == 1) {
+					log.info("注解日志记录成功....");
+				} else {
+                    log.info("注解日志记录失败....");
+                }
+
             } catch (Exception exp) {
                 // 记录本地异常日志
                 log.error("==前置通知异常==");
