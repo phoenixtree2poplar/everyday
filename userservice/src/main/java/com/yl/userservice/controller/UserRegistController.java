@@ -1,6 +1,7 @@
 package com.yl.userservice.controller;
 
 import com.yl.common.entity.Result;
+import com.yl.userservice.annotation.SysLog;
 import com.yl.userservice.entity.CliUser;
 import com.yl.userservice.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,7 @@ public class UserRegistController {
     @Autowired
     private UserServiceImpl userService;
 
+    @SysLog(modular = "user", type = -1)
     @PostMapping
     public Result addUser(@RequestBody @Valid CliUser user, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {

@@ -2,6 +2,7 @@ package com.yl.userservice.controller;
 
 import com.yl.common.entity.Result;
 import com.yl.common.pojo.User;
+import com.yl.userservice.annotation.SysLog;
 import com.yl.userservice.entity.CliUser;
 import com.yl.userservice.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,7 @@ public class UserController {
     @Autowired
     private UserServiceImpl userService;
 
+    @SysLog(modular = "user", type = -1)
     @GetMapping(value = "/{id}")
     //标记拥有ROLE_ADMIN权限可以访问资源
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
